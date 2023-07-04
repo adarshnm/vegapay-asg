@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import CreateAccountModal from "./Forms/CreateAccount";
-import ViewModal from "./Forms/ViewModal";
 import CardsTable from "./Tables/CardsTable";
+import ViewCardModal from "./Forms/ViewCardModal";
+import WalletDetails from "./Forms/WalletDetails";
 
-function CardsInfo() {
+interface CardsInfoProps {
+  isReIssue: boolean;
+}
+
+function CardsInfo(props: CardsInfoProps) {
   const [showViewModal, setShowViewModal] = useState(false);
-  const [showCreateAccountModal, setShowCreateAccountModal] = useState(false);
+  const [showWalletDetailsModal, setShowWalletDetailsModal] = useState(false);
   const [card, setCard] = useState<ICard | undefined>();
 
   const onCardViewClick = (card: ICard) => {
@@ -21,16 +25,17 @@ function CardsInfo() {
     <>
       <CardsTable
         handleViewClick={onCardViewClick}
-        handleCreateAccountClick={() => setShowCreateAccountModal(true)}
+        handleIssueClick={() => setShowWalletDetailsModal(true)}
+        isReIssue={props.isReIssue}
       />
-      <ViewModal
+      <ViewCardModal
         card={card}
         handleClose={handleCloseViewModal}
         open={showViewModal}
       />
-      <CreateAccountModal
-        open={showCreateAccountModal}
-        handleClose={() => setShowCreateAccountModal(false)}
+      <WalletDetails
+        open={showWalletDetailsModal}
+        handleClose={() => setShowWalletDetailsModal(false)}
       />
     </>
   );

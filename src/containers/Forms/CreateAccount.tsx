@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Select, TextField } from "../../components";
+import { Modal, Select } from "../../components";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import {
@@ -100,7 +100,7 @@ const CreateAccountModal = ({ open, handleClose }: ICreateAccountProps) => {
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button variant="outlined" type="submit">
+        <Button variant="outlined" type="reset" color="error">
           Clear
         </Button>
         <Button variant="primary" type="submit">

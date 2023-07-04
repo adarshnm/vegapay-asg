@@ -6,7 +6,6 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import { Box, Button, Typography } from "@mui/material";
 import useAppSelector from "../../hooks/useAppSelector";
 
@@ -49,11 +48,13 @@ const CardIDTypography = styled(Typography)(({ theme }) => ({
   padding: "0 4px",
   color: "#5985f5",
   textTransform: "capitalize",
+  borderRadius: 4,
 }));
 
 interface CardsTableProps {
   handleViewClick: (card: ICard) => void;
-  handleCreateAccountClick?: () => void;
+  handleIssueClick?: () => void;
+  isReIssue?: boolean;
 }
 
 const StatusTypography = styled(Typography)(({ theme }) => ({
@@ -63,8 +64,28 @@ const StatusTypography = styled(Typography)(({ theme }) => ({
   display: "inline-block",
   padding: "0 4px",
   color: "#74c4a0",
-  textTransform: "capitalize",
+  textTransform: "none",
+  borderRadius: 4,
 }));
+
+const Status = ({ markupStatus }: { markupStatus: string }) => {
+  let status = "";
+  let styles = {};
+  if (markupStatus === "APPROVED") {
+    status = "Approved";
+  } else if (markupStatus === "REVIEWER_PENDING") {
+    status = "Pending";
+    styles = {
+      backgroundColor: "#ffff7e",
+      color: "#dfcb5b",
+    };
+  }
+  if (status) {
+    return <StatusTypography sx={styles}>{status}</StatusTypography>;
+  } else {
+    return null;
+  }
+};
 
 export default function CardsTable(props: CardsTableProps) {
   const searchRecords = useAppSelector((state) => state.searchRecords);
@@ -113,7 +134,9 @@ export default function CardsTable(props: CardsTableProps) {
                   </CardIDTypography>
                 </StyledTableCell>
                 <StyledTableCell align="left">
-                  {record.card?.expiryDate}
+                  {record.card?.updatedAt
+                    ? new Date(record.card.updatedAt).toLocaleDateString()
+                    : null}
                 </StyledTableCell>
                 <StyledTableCell align="left">
                   {record.card?.createdAt
@@ -121,17 +144,14 @@ export default function CardsTable(props: CardsTableProps) {
                     : null}
                 </StyledTableCell>
                 <StyledTableCell align="left">
-                  <StatusTypography>
-                    {record?.customer?.makerCheckerStatus}
-                  </StatusTypography>
+                  {record?.customer?.makerCheckerStatus ? (
+                    <Status markupStatus={record.customer.makerCheckerStatus} />
+                  ) : null}
                 </StyledTableCell>
                 <StyledTableCell align="left">
-                  {!record.account ? (
-                    <Button
-                      variant="primary"
-                      onClick={props.handleCreateAccountClick}
-                    >
-                      Create Account
+                  {props.isReIssue ? (
+                    <Button variant="primary" onClick={props.handleIssueClick}>
+                      Issue New
                     </Button>
                   ) : (
                     <Button

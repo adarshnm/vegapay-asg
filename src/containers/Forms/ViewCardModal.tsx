@@ -9,23 +9,23 @@ interface IViewModalProps {
   card?: ICard;
 }
 
-const ViewModal = ({ open, handleClose, card }: IViewModalProps) => (
-  <Modal open={open} title="View" handleClose={handleClose}>
+const ViewCardModal = ({ open, handleClose, card }: IViewModalProps) => (
+  <Modal open={open} title="Card Details" handleClose={handleClose}>
     <DialogContent>
       <Box
         sx={{ paddingTop: 4, display: "flex", flexDirection: "column", gap: 3 }}
       >
         <TextField
-          label="Account ID"
-          value={card?.accountId}
+          label="Customer ID"
+          value={card?.id}
           disabled
           sx={{
             width: "100%",
           }}
         />
         <TextField
-          label="Kit ID"
-          value={card?.binId}
+          label="Name On Card"
+          value={card?.nameOnCard}
           disabled
           sx={{
             width: "100%",
@@ -50,11 +50,20 @@ const ViewModal = ({ open, handleClose, card }: IViewModalProps) => (
             label="Expiry Date"
             value={card?.expiryDate}
             disabled
+            type="date"
             sx={{
               width: "48%",
             }}
           />
         </Box>
+        <TextField
+          label="Activation Date"
+          value={card?.createdAt}
+          type="date"
+          sx={{
+            width: "48%",
+          }}
+        />
       </Box>
     </DialogContent>
     <DialogActions>
@@ -67,4 +76,4 @@ const ViewModal = ({ open, handleClose, card }: IViewModalProps) => (
   </Modal>
 );
 
-export default ViewModal;
+export default ViewCardModal;

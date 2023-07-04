@@ -114,7 +114,11 @@ function CardSale() {
           Search
         </Button>
       </Box>
-      {activeCardIndex === 0 ? <KitData /> : <CardsInfo /> }
+      {activeCardIndex === 0 ? (
+        <KitData />
+      ) : (
+        <CardsInfo isReIssue={activeCardIndex === 2} />
+      )}
     </Box>
   );
 }

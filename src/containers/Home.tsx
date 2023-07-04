@@ -18,10 +18,6 @@ const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })<AppBarProps>(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer - 1,
-  transition: theme.transitions.create(["width", "margin"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
   boxShadow:
     "0px 2px 2px -1px rgba(0,0,0,0.02), 0px 4px 2px 0px rgba(0,0,0,0.01), 0px 1px 9px 0px rgba(0,0,0,0.05)",
   backgroundColor: "#fff",
