@@ -13,7 +13,7 @@ import React, { useState } from "react";
 import { TextField, Select } from "../components";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import UsersTable from "./UsersTable";
+import UsersTable from "./Tables/UsersTable";
 /**
  * TODO: Not completed, stopped dev work as per requirement updates
  */

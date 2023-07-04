@@ -8,7 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Box, Button, Typography } from "@mui/material";
-import useAppSelector from "../hooks/useAppSelector";
+import useAppSelector from "../../hooks/useAppSelector";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   border: 0,

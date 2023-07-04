@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,7 +7,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Drawer from "./Drawer";
 import { DRAWER_WIDTH } from "../constants/drawer.constants";
-import TeamManagement from "./TeamManagement";
 import { IconButton } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import CardSale from "./CardSale";
@@ -40,9 +39,7 @@ const AppBar = styled(MuiAppBar, {
       }),
 }));
 
-const activeIndex = 1;
 export default function Home() {
-  const theme = useTheme();
   const [open, setOpen] = React.useState(true);
 
   const onDrawerToggle = (isOpen: boolean) => {

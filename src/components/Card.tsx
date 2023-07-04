@@ -3,6 +3,7 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import { CardProps, default as MuiCard } from "@mui/material/Card";
 import ContactEmergencyOutlinedIcon from "@mui/icons-material/ContactEmergencyOutlined";
+import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import { Typography } from "@mui/material";
 
 const IconContainer = styled(Box)(({ theme }) => ({
@@ -15,6 +16,12 @@ const IconContainer = styled(Box)(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
 }));
+
+const cardStyle = {
+  color: "#ffffff",
+  width: 36,
+  height: 60,
+};
 function Card(props: ICardProps) {
   return (
     <Box
@@ -39,13 +46,11 @@ function Card(props: ICardProps) {
       onClick={props.onClick}
     >
       <IconContainer>
-        <ContactEmergencyOutlinedIcon
-          sx={{
-            color: "#ffffff",
-            width: 36,
-            height: 60,
-          }}
-        />
+        {props.icon === "contact" ? (
+          <ContactEmergencyOutlinedIcon sx={cardStyle} />
+        ) : (
+          <AccountBoxOutlinedIcon sx={cardStyle} />
+        )}
       </IconContainer>
       <Typography variant="h6">{props.label}</Typography>
     </Box>

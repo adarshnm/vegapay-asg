@@ -8,7 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Box, Button, Typography } from "@mui/material";
-import useAppSelector from "../hooks/useAppSelector";
+import useAppSelector from "../../hooks/useAppSelector";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   border: 0,
@@ -51,12 +51,22 @@ const CardIDTypography = styled(Typography)(({ theme }) => ({
   textTransform: "capitalize",
 }));
 
-interface CustomerTableProps {
+interface CardsTableProps {
   handleViewClick: (card: ICard) => void;
   handleCreateAccountClick?: () => void;
 }
 
-export default function CustomersTable(props: CustomerTableProps) {
+const StatusTypography = styled(Typography)(({ theme }) => ({
+  backgroundColor: "#d9fed6",
+  width: "auto",
+  whiteSpace: "nowrap",
+  display: "inline-block",
+  padding: "0 4px",
+  color: "#74c4a0",
+  textTransform: "capitalize",
+}));
+
+export default function CardsTable(props: CardsTableProps) {
   const searchRecords = useAppSelector((state) => state.searchRecords);
   return (
     <Box sx={{}}>
@@ -64,12 +74,14 @@ export default function CustomersTable(props: CustomerTableProps) {
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell align="left">Customer Name</StyledTableCell>
+              <StyledTableCell align="left">Name</StyledTableCell>
+              <StyledTableCell align="left">Program Name</StyledTableCell>
+              <StyledTableCell align="left">Customer ID</StyledTableCell>
               <StyledTableCell align="left">Card No</StyledTableCell>
-              <StyledTableCell align="left">Email ID</StyledTableCell>
-              <StyledTableCell align="left">Mobile No.</StyledTableCell>
-              <StyledTableCell align="left">Card Network</StyledTableCell>
-              <StyledTableCell align="left">Action</StyledTableCell>
+              <StyledTableCell align="left">Expiry Date</StyledTableCell>
+              <StyledTableCell align="left">Activation Date</StyledTableCell>
+              <StyledTableCell align="left">Status</StyledTableCell>
+              <StyledTableCell align="left">Details</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -81,11 +93,8 @@ export default function CustomersTable(props: CustomerTableProps) {
                   }`}
                 </StyledTableCell>
                 <StyledTableCell align="left">
-                  <CardIDTypography>
-                    {record?.card?.cardNumber || "-"}
-                  </CardIDTypography>
+                  {record.account?.programName}
                 </StyledTableCell>
-
                 <StyledTableCell align="left">
                   <Typography
                     sx={{
@@ -95,20 +104,27 @@ export default function CustomersTable(props: CustomerTableProps) {
                       overflow: "hidden",
                     }}
                   >
-                    {record?.customer.emailId || "-"}
+                    {record.account?.customerId}
                   </Typography>
                 </StyledTableCell>
                 <StyledTableCell align="left">
-                  {record.customer?.mobileNumber}
+                  <CardIDTypography>
+                    {record?.card?.cardNumber || "-"}
+                  </CardIDTypography>
                 </StyledTableCell>
                 <StyledTableCell align="left">
-                  {record.card?.cardNetwork === "RUPAY" ? (
-                    <img src="/rupay.png" width={40} />
-                  ) : (
-                    record.card?.cardNetwork
-                  )}
+                  {record.card?.expiryDate}
                 </StyledTableCell>
-
+                <StyledTableCell align="left">
+                  {record.card?.createdAt
+                    ? new Date(record.card.createdAt).toLocaleDateString()
+                    : null}
+                </StyledTableCell>
+                <StyledTableCell align="left">
+                  <StatusTypography>
+                    {record?.customer?.makerCheckerStatus}
+                  </StatusTypography>
+                </StyledTableCell>
                 <StyledTableCell align="left">
                   {!record.account ? (
                     <Button

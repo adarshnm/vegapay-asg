@@ -32,7 +32,7 @@ interface IUserRole {
 }
 
 interface ICardProps {
-    icon: string,
+    icon: "contact" | "profile",
     label: string,
     isActive?: boolean,
     onClick: () => void
