@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import useAppDispatch from "../hooks/useAppDispatch";
-import { fetchUsers } from "../store/actions/users";
 import Home from "./Home";
 import { searchCustomerRecords } from "../store/actions/searchRecords";
+import Notification from "./Notification";
 
 function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(fetchUsers());
+    // dispatch(fetchUsers());
     dispatch(
       searchCustomerRecords({
         value: "",
@@ -17,7 +17,12 @@ function App() {
       })
     );
   }, []);
-  return <Home />;
+  return (
+    <>
+      <Home />
+      <Notification />
+    </>
+  );
 }
 
 export default App;

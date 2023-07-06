@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import usersReducer from './features/users';
 import searchRecordsReducer from './features/searchRecords';
+import notificationReducer from './features/notification';
 const store = configureStore({
     reducer: {
         users: usersReducer,
-        searchRecords: searchRecordsReducer
-
+        searchRecords: searchRecordsReducer,
+        notification: notificationReducer
     }
 });
 

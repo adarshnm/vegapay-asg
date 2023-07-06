@@ -31,6 +31,11 @@ interface IUserRole {
     updatedAt: Date;
 }
 
+interface INotification {
+    type: string;
+    text: string;
+}
+
 interface ICardProps {
     icon: "contact" | "profile",
     label: string,
